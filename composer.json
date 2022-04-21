@@ -1,0 +1,26 @@
+{
+    "name": "moshong/nft_zxinchainn",
+    "description": "腾讯至信链 NFT 平台接口SDK",
+    "autoload": {
+        "psr-4": {
+            "NftZxinchainn\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Mos",
+            "email": "9080@live.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.2",
+        "guzzlehttp/guzzle": "^7.4",
+        "pimple/pimple": "^3.0",
+        "psr/simple-cache": "^1.0",
+        "symfony/event-dispatcher": "^4.3 || ^5.0",
+        "symfony/http-foundation": "^2.7 || ^3.0 || ^4.0 || ^5.0",
+        "symfony/cache": "^3.3 || ^4.3 || ^5.0",
+        "monolog/monolog": "^2.4",
+      "ext-json": "*"
+    }
+}
