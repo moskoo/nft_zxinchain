@@ -29,6 +29,7 @@ class Application extends ServiceContainer
         Auth\ServiceProvider::class,
         Wallet\ServiceProvider::class,
         Upload\ServiceProvider::class,
+        Nft\ServiceProvider::class,
     ];
     /**
      * Handle dynamic calls.

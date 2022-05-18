@@ -494,7 +494,7 @@ class Client extends BaseClient
             'userIdentification' => $userIdentification,
             'verifyCode' => $verifyCode
         ];
-        return  $this->httpPostJson('api/v1/nft/identity/bind/platform_self', $params);
+        return  $this->httpPostJson('/api/v1/nft/identity/bind/platform_self', $params);
     }
 
     /**
@@ -515,7 +515,97 @@ class Client extends BaseClient
         $params = [
             'addressList' => $addressList,
         ];
-        return  $this->httpGet2('api/v1/nft/identity/bind/query', $params);
+        return  $this->httpGet2('/api/v1/nft/identity/bind/query', $params);
+    }
+
+    /**
+     * 地址与身份对应关系核验接口
+     * (c) moshong <9080@live.com>
+     * @param string $address 地址 | required
+     * @param string $faceResultId 人脸结果id | required
+     * @return json
+     * @return      int retCode 返回状态码
+     * @return      string retMsg 返回信息
+     * @return      json data - string userIdentification 用户唯一标识
+     */
+    public function verifyAddressIdentity($address='',$faceResultId='')
+    {
+        if (!$address || !$faceResultId){
+            throw new Exception('地址或人脸识别不能为空');
+        }
+        $params = [
+            'address' => $address,
+            'faceResultId' => $faceResultId,
+        ];
+        return  $this->httpPostJson2('/api/v1/nft/identity/verify/address_identity', $params);
+    }
+
+
+    /**
+     * 通过用户标识请求人脸核身h5 url
+     * (c) moshong <9080@live.com>
+     * @param string $userIdentification 用户唯一标识 | required
+     * @param string $from browser：表示在浏览器启动刷脸  App：表示在 App 里启动刷脸，默认值为 App |
+     * @return json
+     * @return      int retCode 返回状态码
+     * @return      string retMsg 返回信息
+     * @return      json data - string h5Url 启动人脸核身的 h5 url ｜ string faceId 人脸核验请求的唯一标识，需要保存
+     */
+    public function faceUrl($userIdentification='',$from='')
+    {
+        if (!$userIdentification){
+            throw new Exception('用户唯一标识不能为空');
+        }
+        $params = [
+            'userIdentification' => $userIdentification,
+        ];
+        if($from) $params['from'] = $from;
+        return  $this->httpPostJson2('/api/v1/nft/face/url', $params);
+    }
+
+    /**
+     * 通过用户地址请求人脸核身h5 url
+     * (c) moshong <9080@live.com>
+     * @param string $address 用户地址 | required
+     * @param string $from browser：表示在浏览器启动刷脸  App：表示在 App 里启动刷脸，默认值为 App |
+     * @return json
+     * @return      int retCode 返回状态码
+     * @return      string retMsg 返回信息
+     * @return      json data - string h5Url 启动人脸核身的 h5 url ｜ string faceId 人脸核验请求的唯一标识，需要保存
+     */
+    public function faceUrlByAddress($address='',$from='')
+    {
+        if (!$address){
+            throw new Exception('用户地址不能为空');
+        }
+        $params = [
+            'address' => $address,
+        ];
+        if($from) $params['from'] = $from;
+        return  $this->httpPostJson2('/api/v1/nft/face/url_by_address', $params);
+    }
+
+
+    /**
+     * 人脸核身结果查询接口
+     * (c) moshong <9080@live.com>
+     * @param string $userIdentification 用户唯一标识 | required
+     * @param string $faceId 人脸请求的唯一Id | required
+     * @return json
+     * @return      int retCode 返回状态码
+     * @return      string retMsg 返回信息
+     * @return      json data - boolean result 人脸核身结果
+     */
+    public function faceQuery($userIdentification='',$faceId='')
+    {
+        if (!$userIdentification || !$faceId){
+            throw new Exception('用户标识和人脸请求的唯一id不能为空');
+        }
+        $params = [
+            'userIdentification' => $userIdentification,
+            'faceId' => $faceId,
+        ];
+        return  $this->httpGet2('/api/v1/nft/face/query', $params);
     }
 
 

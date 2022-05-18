@@ -166,4 +166,26 @@ class Client extends BaseClient
         return  $this->httpPostJson('/api/v1/nft/query/image/moderation',$params);
     }
 
+
+    /**
+     * 查询素材地址接口
+     * (c) moshong <9080@live.com>
+     * @param string $userIdentification 发行唯一标识）|
+     * @param string $seriesName 系列名 |
+     * @return json
+     * @return      int retCode 返回状态码
+     * @return      string retMsg 返回信息
+     * @return      json data - string materialAddress - cos地址
+     */
+    public function getNftUrl($userIdentification='',$seriesName='')
+    {
+        $platformIdentification = $this->app->config['identification'];
+        $params = [
+            'platformIdentification' => $platformIdentification,
+        ];
+        if($userIdentification) $params['userIdentification'] = $userIdentification;
+        if($seriesName) $params['seriesName'] = $seriesName;
+        return  $this->httpGet('/api/v1/nft/upload/url',$params);
+    }
+
 }

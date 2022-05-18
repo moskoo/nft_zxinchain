@@ -93,6 +93,12 @@ class ServiceContainer extends Container
         }else{
             $base_uri = 'https://nfa.zxinchain.com';
         }
+        if (!isset($this->userConfig['identification'])){
+            $this->userConfig['identification'] = null;
+        }
+        if (!isset($this->userConfig['address'])){
+            $this->userConfig['address'] = null;
+        }
         $base = [
             'http' => [
                 'timeout' => 30.0,
