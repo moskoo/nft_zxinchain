@@ -951,7 +951,7 @@ class Client extends BaseClient
     }
 
     /**
-     * 平台积分转移状态查询
+     * 平台积分转移状态查询 x
      * (c) moshong <9080@live.com>
      * @param int64 $taskId 查询任务结果 | required
      * @return json
